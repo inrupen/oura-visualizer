@@ -7,7 +7,7 @@ interface SleepDataVisualizationProps {
 
 const SleepDataVisualization: React.FC<SleepDataVisualizationProps> = ({ data }) => {
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height={300}>
       <AreaChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="day" />

@@ -7,7 +7,7 @@ interface TemperatureVisualizationProps {
 
 const TemperatureVisualization: React.FC<TemperatureVisualizationProps> = ({ data }) => {
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="day" />
