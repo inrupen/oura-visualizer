@@ -1,12 +1,14 @@
 export interface SleepDayData {
-  date: string;
+  day: string;
   totalSleep: number;
   timeInBed: number;
-  deepSleep: number;
-  remSleep: number;
-  lightSleep: number;
-  hrv: number;
-  restingHeartRate: number;
+  deep_sleep_duration: number;
+  rem_sleep_duration: number;
+  light_sleep_duration: number;
+  awake_time: number;
+  average_hrv: number;
+  average_heart_rate: number;
+  efficiency: number;
 }
 
 export interface SleepEfficiencyData {

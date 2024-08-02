@@ -12,6 +12,8 @@ interface SleepEfficiencyChartProps {
 }
 
 const SleepEfficiencyChart: React.FC<SleepEfficiencyChartProps> = ({ sleepData }) => {
+  console.log("Sleep Efficiency Data:", sleepData); // Debug log
+
   const data: ChartData<'line'> = {
     labels: sleepData.map(d => d.date),
     datasets: [
@@ -19,7 +21,9 @@ const SleepEfficiencyChart: React.FC<SleepEfficiencyChartProps> = ({ sleepData }
         label: 'Sleep Efficiency (%)',
         data: sleepData.map(d => d.sleepEfficiency),
         borderColor: '#8884d8',
+        backgroundColor: '#8884d8',
         fill: false,
+        tension: 0.1,
       },
     ],
   };

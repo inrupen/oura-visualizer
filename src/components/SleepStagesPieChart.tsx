@@ -14,6 +14,8 @@ interface SleepStagesPieChartProps {
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
 const SleepStagesPieChart: React.FC<SleepStagesPieChartProps> = ({ stages }) => {
+  console.log("Sleep Stages Data:", stages); // Debug log
+
   const aggregatedData = stages.reduce(
     (acc, stage) => {
       acc.deep += stage.deep;

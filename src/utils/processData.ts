@@ -2,30 +2,24 @@ import { SleepDayData, SleepEfficiencyData, SleepStageData, HRVandRHRData } from
 
 export const calculateSleepEfficiency = (data: SleepDayData[]): SleepEfficiencyData[] => {
   return data.map(day => ({
-    date: day.date, // Ensure 'date' is included for chart x-axis
-    totalSleep: day.totalSleep,
-    timeInBed: day.timeInBed,
-    sleepEfficiency: (day.totalSleep / day.timeInBed) * 100
+    date: day.day, // Ensure 'date' is included for chart x-axis
+    sleepEfficiency: day.efficiency,
   }));
 };
 
 export const prepareSleepStageData = (data: SleepDayData[]): SleepStageData[] => {
   return data.map(day => ({
-    date: day.date,
-    deep: day.deepSleep,
-    rem: day.remSleep,
-    light: day.lightSleep
+    date: day.day,
+    deep: day.deep_sleep_duration,
+    rem: day.rem_sleep_duration,
+    light: day.light_sleep_duration,
   }));
 };
 
 export const prepareHRVandRHRData = (data: SleepDayData[]): HRVandRHRData[] => {
-  let weeklyAverage: HRVandRHRData[] = [];
-  // Assuming 'data' is sorted by 'date'
-  for (let i = 0; i < data.length; i += 7) {
-    let weekSlice = data.slice(i, i + 7);
-    let avgHRV = weekSlice.reduce((acc, curr) => acc + curr.hrv, 0) / weekSlice.length;
-    let avgRHR = weekSlice.reduce((acc, curr) => acc + curr.restingHeartRate, 0) / weekSlice.length;
-    weeklyAverage.push({ date: weekSlice[0].date, hrv: avgHRV, restingHeartRate: avgRHR });
-  }
-  return weeklyAverage;
+  return data.map(day => ({
+    date: day.day,
+    hrv: day.average_hrv,
+    restingHeartRate: day.average_heart_rate,
+  }));
 };

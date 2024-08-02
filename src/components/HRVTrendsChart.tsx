@@ -12,6 +12,8 @@ interface HRVTrendsChartProps {
 }
 
 const HRVTrendsChart: React.FC<HRVTrendsChartProps> = ({ trendData }) => {
+  console.log("HRV Trends Data:", trendData); // Debug log
+
   const data: ChartData<'line'> = {
     labels: trendData.map(d => d.date),
     datasets: [
@@ -19,15 +21,19 @@ const HRVTrendsChart: React.FC<HRVTrendsChartProps> = ({ trendData }) => {
         label: 'HRV',
         data: trendData.map(d => d.hrv),
         borderColor: '#82ca9d',
+        backgroundColor: '#82ca9d',
         fill: false,
         yAxisID: 'y1',
+        tension: 0.1,
       },
       {
         label: 'Resting Heart Rate',
         data: trendData.map(d => d.restingHeartRate),
         borderColor: '#8884d8',
+        backgroundColor: '#8884d8',
         fill: false,
         yAxisID: 'y2',
+        tension: 0.1,
       },
     ],
   };
