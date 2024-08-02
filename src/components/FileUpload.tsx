@@ -1,5 +1,23 @@
 import React, { useState } from 'react';
 import Papa from 'papaparse';
+import styled from 'styled-components';
+
+const UploadContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+const Button = styled.button`
+  background: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
+  border: 1px solid ${({ theme }) => theme.toggleBorder};
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+`;
 
 interface FileUploadProps {
   onDataParsed: (data: any[]) => void;
@@ -18,17 +36,20 @@ const FileUpload: React.FC<FileUploadProps> = ({ onDataParsed }) => {
         header: true,
         dynamicTyping: true,
         complete: (results) => {
+          console.log("Parsed Data:", results.data); // Add this line
           onDataParsed(results.data);
         },
       });
+
+      
     }
   };
 
   return (
-    <div>
+    <UploadContainer>
       <input type="file" accept=".csv" onChange={handleFileChange} />
-      <button onClick={handleFileUpload}>Upload</button>
-    </div>
+      <Button onClick={handleFileUpload}>Upload Data</Button>
+    </UploadContainer>
   );
 };
 

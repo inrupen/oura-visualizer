@@ -1,49 +1,29 @@
-import React, { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import React, { useState, useContext } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from './styles/themes';
+import { GlobalStyles } from './styles/GlobalStyles';
 import FileUpload from './components/FileUpload';
 import SleepDataVisualization from './components/SleepDataVisualization';
 import HeartRateVisualization from './components/HeartRateVisualization';
 import TemperatureVisualization from './components/TemperatureVisualization';
 import ActivityVisualization from './components/ActivityVisualization';
-import { darkTheme, lightTheme } from './themes';
-import './App.css';
-
-const Container = styled.div`
-  text-align: center;
-  padding: 20px;
-  background-color: ${(props) => props.theme.background};
-  color: ${(props) => props.theme.color};
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  margin: 10px;
-  cursor: pointer;
-  background-color: ${(props) => props.theme.color};
-  color: ${(props) => props.theme.background};
-  border: none;
-  border-radius: 5px;
-`;
 
 const App: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
-  const [theme, setTheme] = useState(darkTheme);
+  const [theme, setTheme] = useState('dark');
 
   const handleDataParsed = (parsedData: any[]) => {
     setData(parsedData);
   };
-
   const toggleTheme = () => {
-    setTheme(theme === darkTheme ? lightTheme : darkTheme);
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container>
-        <h1>Oura Ring Data Visualizer</h1>
-        <Button onClick={toggleTheme}>
-          Switch to {theme === darkTheme ? 'Light' : 'Dark'} Mode
-        </Button>
+    <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+      <GlobalStyles />
+      <div>
+        <button onClick={toggleTheme}>Toggle Theme</button>
         <FileUpload onDataParsed={handleDataParsed} />
         {data.length > 0 && (
           <>
@@ -57,7 +37,7 @@ const App: React.FC = () => {
             <ActivityVisualization data={data} />
           </>
         )}
-      </Container>
+      </div>
     </ThemeProvider>
   );
 };
