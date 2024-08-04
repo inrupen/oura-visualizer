@@ -2,26 +2,24 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { ChartData, ChartOptions } from 'chart.js';
-import { SleepEfficiencyData } from '../types';
+import { GenericChartData } from '../types';
 
 // Register components
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-interface SleepEfficiencyChartProps {
-  sleepData: SleepEfficiencyData[];
+interface HeartRateVisualizationProps {
+  data: GenericChartData[];
 }
 
-const SleepEfficiencyChart: React.FC<SleepEfficiencyChartProps> = ({ sleepData }) => {
-  console.log("Sleep Efficiency Data:", sleepData); // Debug log
-
-  const data: ChartData<'line'> = {
-    labels: sleepData.map(d => d.date),
+const HeartRateVisualization: React.FC<HeartRateVisualizationProps> = ({ data }) => {
+  const chartData: ChartData<'line'> = {
+    labels: data.map(d => d.date),
     datasets: [
       {
-        label: 'Sleep Efficiency (%)',
-        data: sleepData.map(d => d.sleepEfficiency),
-        borderColor: '#8884d8',
-        backgroundColor: '#8884d8',
+        label: 'Average Heart Rate (bpm)',
+        data: data.map(d => d.value),
+        borderColor: '#82ca9d',
+        backgroundColor: '#82ca9d',
         fill: false,
         tension: 0.1,
       },
@@ -41,15 +39,13 @@ const SleepEfficiencyChart: React.FC<SleepEfficiencyChartProps> = ({ sleepData }
       y: {
         title: {
           display: true,
-          text: 'Sleep Efficiency (%)',
+          text: 'BPM',
         },
-        min: 0,
-        max: 100,
       },
     },
   };
 
-  return <Line data={data} options={options} />;
+  return <Line data={chartData} options={options} />;
 };
 
-export default SleepEfficiencyChart;
+export default HeartRateVisualization;
