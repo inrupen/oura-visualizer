@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# Oura Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project visualizes sleep and health data from the Oura ring using a React frontend and a Node.js backend. The application is Dockerized for easy deployment.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Clone the Repository
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+git clone https://github.com/yourusername/oura-visualizer.git
+cd oura-visualizer
+```
 
-### `npm test`
+### Building and Running with Docker
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Build the Docker images:
+```bash
+docker-compose build
+```
 
-### `npm run build`
+Start the Docker containers:
+```bash
+docker-compose up
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After running docker-compose up, your React application should be available at http://localhost:3000, and your backend server should be running at http://localhost:5500.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Stopping the Application
+To stop the running containers, press Ctrl+C in the terminal where docker-compose up is running. Then, remove the stopped containers with:
+docker-compose down
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Development
 
-### `npm run eject`
+#### Running the Frontend Locally
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Navigate to the frontend directory:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+cd frontend
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Start the development server:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+The frontend should now be running on http://localhost:3000.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Running the Backend Locally
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Navigate to the backend directory:
+
+```bash
+cd backend
+npm install
+```
+
+Start the server:
+
+```bash
+node server.js
+```
+
+The backend should now be running on http://localhost:5500.
+
+## File Upload
+
+To upload a CSV file with your Oura data, navigate to the application in your browser and use the file upload feature. The data will be processed and visualized accordingly.
+
+## Technologies Used:
+
+React
+Node.js
+Docker
+Chart.js for visualizations
+
